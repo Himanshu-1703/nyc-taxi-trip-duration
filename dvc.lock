@@ -8,6 +8,10 @@ stages:
       md5: 2ac9e57fc0bc2d2a1a610a695529d479.dir
       size: 87295035
       nfiles: 2
+    - path: .\src\data\extract_dataset.py
+      hash: md5
+      md5: 6b4b992635e0d560a778b38c67f25e12
+      size: 1082
     outs:
     - path: .\data\raw\extracted
       hash: md5
