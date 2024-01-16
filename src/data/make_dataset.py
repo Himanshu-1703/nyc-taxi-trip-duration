@@ -1,5 +1,5 @@
 import sys
-from yaml import load
+from yaml import safe_load
 import pandas as pd
 from pathlib import Path
 from sklearn.model_selection import train_test_split
@@ -10,14 +10,16 @@ def load_raw_data(input_path: str) ->  pd.DataFrame:
     return raw_data
 
 
-def train_val_split(input_path: str,
+def train_val_split(data: pd.DataFrame,
                     test_size: float,
                     random_state: int) -> tuple[pd.DataFrame, pd.DataFrame]:
-    data = load_raw_data(input_path)
+    
     train_data, val_data = train_test_split(data,
                                             test_size= test_size,
                                             random_state= random_state)
     return train_data, val_data
+
+
 
 
 def save_data(data: pd.DataFrame,output_path: str):
@@ -25,8 +27,8 @@ def save_data(data: pd.DataFrame,output_path: str):
     
 
 def read_params(input_file):
-    with open(input_file) as f:   
-        params_file = load(f)
+    with open(input_file) as f:
+        params_file = safe_load(f)
     
     test_size = params_file['make_dataset']['test_size']
     random_state = params_file['make_dataset']['random_state']
@@ -41,6 +43,8 @@ def main():
     root_path = current_path.parent.parent.parent
     # interim data directory path
     interim_data_path = root_path / 'data' / 'interim'
+    # make directory for the interim path
+    interim_data_path.mkdir(exist_ok= True)
     # raw train file path
     raw_df_path = root_path / 'data' / 'raw' / 'extracted' / input_file_name
     # load the training file
@@ -52,9 +56,9 @@ def main():
                                        test_size= test_size,
                                        random_state= random_state)
     # save the train data to the output path
-    save_data(data= train_df, output_path= interim_data_path)
+    save_data(data= train_df, output_path= interim_data_path / 'train.csv')
     # save the val data to the output path
-    save_data(data= val_df, output_path= interim_data_path)
+    save_data(data= val_df, output_path= interim_data_path / 'val.csv')
     
     
 if __name__ == '__main__':
