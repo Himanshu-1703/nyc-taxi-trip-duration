@@ -1,7 +1,8 @@
 from zipfile import ZipFile
 from pathlib import Path
 
-def extract_zip_file(input_path,output_path):
+
+def extract_zip_file(input_path: str,output_path: str):
     with ZipFile(file= input_path) as f:
         f.extractall(path= output_path)
         
