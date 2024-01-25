@@ -89,6 +89,3 @@ data/interim/
 
 # Mypy cache
 .mypy_cache/
-
-# models folder
-/models
