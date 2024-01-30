@@ -1,10 +1,24 @@
+import logging
 from zipfile import ZipFile
 from pathlib import Path
+from src.logger import create_log_path, CustomLogger
+
+# path to save the log files
+log_file_path = create_log_path('extract_dataset')
+
+# create the custom logger object
+extract_logger = CustomLogger(logger_name='extract_dataset',
+                              log_filename=log_file_path)
+# set the level of logging to INFO
+extract_logger.set_log_level(level=logging.INFO)
 
 
-def extract_zip_file(input_path: str,output_path: str):
+def extract_zip_file(input_path: Path,output_path: Path):
     with ZipFile(file= input_path) as f:
         f.extractall(path= output_path)
+        input_file_name = input_path.stem + input_path.suffix
+        extract_logger.save_logs(msg=f'{input_file_name} extracted successfully at the target path',
+                                 log_level='info')
         
 def main():
     # current file path 
