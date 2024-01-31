@@ -31,6 +31,8 @@ def train_val_split(data: pd.DataFrame,
                                             random_state= random_state)
     dataset_logger.save_logs(msg=f'Data is split into train split with shape {train_data.shape} and val split with shape {val_data.shape}',
                              log_level='info')
+    dataset_logger.save_logs(msg=f'The parameter values are {test_size} for test_size and {random_state} for random_state',
+                             log_level='info')
     return train_data, val_data
 
 
@@ -43,12 +45,27 @@ def save_data(data: pd.DataFrame,output_path: Path):
     
 
 def read_params(input_file):
-    with open(input_file) as f:
-        params_file = safe_load(f)
-    
-    test_size = params_file['make_dataset']['test_size']
-    random_state = params_file['make_dataset']['random_state']
-    return test_size, random_state
+    try:
+        with open(input_file) as f:
+            params_file = safe_load(f)
+            
+    except FileNotFoundError as e:
+        dataset_logger.save_logs(msg='Parameters file not found, Switching to default values for train test split',
+                                 log_level='error')
+        default_dict = {'test_size': 0.25,
+                        'random_state': None}
+        # read the default_dictionary
+        test_size = default_dict['test_size']
+        random_state = default_dict['random_state']
+        return test_size, random_state
+        
+    else:
+        dataset_logger.save_logs(msg=f'Parameters file read successfully',
+                                    log_level='info')
+        # read the parameters from the parameters file
+        test_size = params_file['make_dataset']['test_size']
+        random_state = params_file['make_dataset']['random_state']
+        return test_size, random_state
 
 def main():
     # read the input file name from command

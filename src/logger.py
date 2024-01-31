@@ -87,7 +87,7 @@ class CustomLogger:
         logger = self.get_logger()
         logger.setLevel(level=level)
         
-    def save_logs(self,msg,log_level):
+    def save_logs(self,msg,log_level='info'):
         """
         Saves logs to the specified log file with the given message and log level.
 
