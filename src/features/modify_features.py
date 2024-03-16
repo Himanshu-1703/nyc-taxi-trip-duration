@@ -55,7 +55,7 @@ def make_datetime_features(dataframe: pd.DataFrame,column_type:str='pickup') -> 
     return dataframe
 
 
-def remove_passengers(dataframe: pd.DataFrame) -> pd.dataFrame:
+def remove_passengers(dataframe: pd.DataFrame) -> pd.DataFrame:
     passengers_to_include = list(range(1,7))
     new_dataframe_filter = dataframe['passenger_count'].isin(passengers_to_include)
     new_dataframe = dataframe.loc[new_dataframe_filter,:]
@@ -87,21 +87,10 @@ def read_data(data_path):
 
 
 def main(data_path,filename):
-    # read the input file name from command
-    input_file_path = sys.argv[1]
-    # current file path
-    current_path = Path(__file__)
-    # root directory path
-    root_path = current_path.parent.parent.parent
-    # input data path
-    data_path = root_path / input_file_path
-    
-    # read the data into a dataframe
+    # read the data into dataframe
     df = read_data(data_path)
     # do the modifications on the input data
     df_input_modifications = input_modifications(dataframe=df)
-    # get the file name
-    filename = data_path.parts[-1]
     # check whether the input file has target column
     if (filename == "train.csv") or (filename == "val.csv"):
         df_final = target_modifications(dataframe=df_input_modifications)  
@@ -112,4 +101,16 @@ def main(data_path,filename):
         
 
 if __name__ == "__main__":
-    main()
+    for ind in range(1,4):
+        # read the input file name from command
+        input_file_path = sys.argv[ind]
+        # current file path
+        current_path = Path(__file__)
+        # root directory path
+        root_path = current_path.parent.parent.parent
+        # input data path
+        data_path = root_path / input_file_path
+        # get the file name
+        filename = data_path.parts[-1]
+        # call the main function
+        main(data_path=data_path,filename=filename)

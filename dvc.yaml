@@ -19,7 +19,7 @@ stages:
       - .\data\interim
 
   modify_features:
-    cmd: python .\src\features\modify_features.py \data\interim\train.csv \data\interim\val.csv \data\raw\extracted\test.csv
+    cmd: python .\src\features\modify_features.py data/interim/train.csv data/interim/val.csv data/raw/extracted/test.csv
     deps:
       - .\src\features\modify_features.py
       - .\data\interim\train.csv
