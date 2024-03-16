@@ -89,3 +89,6 @@ data/interim/
 
 # Mypy cache
 .mypy_cache/
+
+# folder for excalidraw diagrams
+excali diagrams/
