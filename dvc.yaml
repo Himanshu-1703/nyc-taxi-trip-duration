@@ -26,6 +26,6 @@ stages:
       - .\data\interim\val.csv
       - .\data\raw\extracted\test.csv
     outs:
-      - .\data\processed\modifications
+      - .\data\processed\transformations
 
       

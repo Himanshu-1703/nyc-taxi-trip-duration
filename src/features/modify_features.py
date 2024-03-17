@@ -79,7 +79,7 @@ def make_datetime_features(dataframe: pd.DataFrame) -> pd.DataFrame:
     original_number_of_rows, original_number_of_columns = new_dataframe.shape
     
     # convert the column to datetime column
-    new_dataframe.loc[:,'pickup_datetime'] = pd.to_datetime(new_dataframe['pickup_datetime'])
+    new_dataframe['pickup_datetime'] = pd.to_datetime(new_dataframe['pickup_datetime'])
     modify_logger.save_logs(msg=f'pickup_datetime column converted to datetime {new_dataframe["pickup_datetime"].dtype}')
     
     # do the modifications
@@ -168,7 +168,7 @@ def main(data_path,filename):
 if __name__ == "__main__":
     for ind in range(1,4):
         # read the input file name from command
-        input_file_path = 'data/interim/train.csv'
+        input_file_path = sys.argv[ind]
         # current file path
         current_path = Path(__file__)
         # root directory path
@@ -180,9 +180,9 @@ if __name__ == "__main__":
         # call the main function
         df_final = main(data_path=data_path,filename=filename)
         # save the dataframe
-        output_path = root_path / "data/processed/transformations/" / filename
+        output_path = root_path / "data/processed/transformations"
         # make the directory if not available
         output_path.mkdir(parents=True,exist_ok=True)
         # save the data
-        save_data(df_final,output_path)
+        save_data(df_final,output_path / filename)
         modify_logger.save_logs(msg=f'{filename} saved at the destination folder')
