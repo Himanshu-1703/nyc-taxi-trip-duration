@@ -39,7 +39,7 @@ def train_val_split(data: pd.DataFrame,
 
 
 def save_data(data: pd.DataFrame,output_path: Path):
-    data.to_csv(output_path)
+    data.to_csv(output_path,index=False)
     dataset_logger.save_logs(msg=f'{output_path.stem + output_path.suffix} data saved successfully to the output folder',
                              log_level='info')
     
