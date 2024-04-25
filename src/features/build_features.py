@@ -31,7 +31,7 @@ def read_dataframe(path):
     return df
 
 def save_dataframe(dataframe:pd.DataFrame, save_path):
-    dataframe.to_csv(save_path)
+    dataframe.to_csv(save_path,index=False)
 
 if __name__ == "__main__":
     for ind in range(1,4):
@@ -46,7 +46,7 @@ if __name__ == "__main__":
         # get the file name
         filename = data_path.parts[-1]
         # call the main function
-        df = read_dataframe(data_path / filename)
+        df = read_dataframe(data_path)
         # build features for dataframe
         df = implement_distances(dataframe=df,
                                  lat1=df['pickup_latitude'],

@@ -1,5 +1,4 @@
 import numpy as np
-from haversine import haversine
 
 def haversine_distance(lat1:float, lon1:float, lat2:float, lon2:float):
     """
