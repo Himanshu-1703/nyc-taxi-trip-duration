@@ -60,7 +60,7 @@ def main():
     # save the model after training
     model_output_path = root_path / 'models' / 'models'
     model_output_path.mkdir(exist_ok=True)
-    save_model(model=regressor,save_path=model_output_path)
+    save_model(model=regressor,save_path=model_output_path / 'rf.joblib')
     
     
 if __name__ == "__main__":

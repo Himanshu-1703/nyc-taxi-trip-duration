@@ -108,8 +108,8 @@ stages:
       size: 23795160
     - path: .\src\features\data_preprocessing.py
       hash: md5
-      md5: f9f17f939ddac9bd68f714820dec1441
-      size: 7595
+      md5: eed63e4299e98a2989478d6f0678278f
+      size: 7539
     params:
       params.yaml:
         data_preprocessing.percentiles:
@@ -118,11 +118,34 @@ stages:
     outs:
     - path: .\data\processed\final
       hash: md5
-      md5: f041185b1deacad94fad15664ba14052.dir
-      size: 864853253
+      md5: 88e1210c236eebc07e9f586231c40044.dir
+      size: 351588960
       nfiles: 3
     - path: .\models\transformers
       hash: md5
-      md5: bb8fa3abdaf1e5621a4320c86dcb0d40.dir
-      size: 8155
+      md5: f43111d6e98ea7c598d80e7f88e849f0.dir
+      size: 7179
       nfiles: 3
+  train_model:
+    cmd: python .\src\models\train_model.py data/processed/final/train.csv
+    deps:
+    - path: .\data\processed\final\train.csv
+      hash: md5
+      md5: 8df73650a714b88af7e0409737942032
+      size: 229128241
+    - path: .\src\models\train_model.py
+      hash: md5
+      md5: 612aadd8d39f25061fe735f747a24c5b
+      size: 1817
+    params:
+      params.yaml:
+        train_model.random_forest_regressor.max_depth: 5
+        train_model.random_forest_regressor.n_estimators: 20
+        train_model.random_forest_regressor.n_jobs: -1
+        train_model.random_forest_regressor.verbose: 2
+    outs:
+    - path: .\models\models
+      hash: md5
+      md5: ffe22e39ea935989e52ce57436d177ef.dir
+      size: 98817
+      nfiles: 1
