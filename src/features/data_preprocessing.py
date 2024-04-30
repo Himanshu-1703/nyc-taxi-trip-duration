@@ -35,7 +35,7 @@ def remove_outliers(dataframe:pd.DataFrame, percentiles:list, column_names:list)
 #* distances - Standard scale
 
 def train_preprocessor(data:pd.DataFrame):
-    ohe_columns = ['vendor_id','pickup_hour','pickup_date','pickup_month','pickup_day']
+    ohe_columns = ['vendor_id']
     standard_scale_columns = ['haversine_distance', 'euclidean_distance',
        'manhattan_distance']
     min_max_scale_columns = ['pickup_longitude',

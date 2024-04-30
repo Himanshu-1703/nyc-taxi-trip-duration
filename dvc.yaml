@@ -59,5 +59,7 @@ stages:
     params:
       - train_model.random_forest_regressor.n_estimators
       - train_model.random_forest_regressor.n_jobs
+      - train_model.random_forest_regressor.max_depth
+      - train_model.random_forest_regressor.verbose
     outs:
       - .\models\models
