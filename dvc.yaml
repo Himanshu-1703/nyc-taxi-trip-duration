@@ -65,8 +65,8 @@ stages:
       - .\models\models
 
   predict_model:
-    cmd: python .\src\models\train_model.py data/processed/final/val.csv
+    cmd: python .\src\models\predict_model.py data/processed/final/val.csv
     deps:
       - .\src\models\predict_model.py
-      - .\src\data\processed\final\val.csv
+      - .\data\processed\final\val.csv
       - .\models\models
