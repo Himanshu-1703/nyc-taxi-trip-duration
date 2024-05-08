@@ -139,15 +139,15 @@ stages:
       size: 1817
     params:
       params.yaml:
-        train_model.random_forest_regressor.max_depth: 5
-        train_model.random_forest_regressor.n_estimators: 100
+        train_model.random_forest_regressor.max_depth: 6
+        train_model.random_forest_regressor.n_estimators: 200
         train_model.random_forest_regressor.n_jobs: -1
         train_model.random_forest_regressor.verbose: 2
     outs:
     - path: .\models\models
       hash: md5
-      md5: 58aad3c43ffe7c5f9bc4f7dd45ab2497.dir
-      size: 486657
+      md5: df56db3999860818cf2179a32ca80d90.dir
+      size: 1893057
       nfiles: 1
   predict_model:
     cmd: python .\src\models\predict_model.py train.csv val.csv
@@ -158,8 +158,8 @@ stages:
       size: 25463507
     - path: .\models\models
       hash: md5
-      md5: 58aad3c43ffe7c5f9bc4f7dd45ab2497.dir
-      size: 486657
+      md5: df56db3999860818cf2179a32ca80d90.dir
+      size: 1893057
       nfiles: 1
     - path: .\src\models\predict_model.py
       hash: md5
