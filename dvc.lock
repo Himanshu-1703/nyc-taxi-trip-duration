@@ -150,7 +150,7 @@ stages:
       size: 486657
       nfiles: 1
   predict_model:
-    cmd: python .\src\models\predict_model.py data/processed/final/val.csv
+    cmd: python .\src\models\predict_model.py train.csv val.csv
     deps:
     - path: .\data\processed\final\val.csv
       hash: md5
@@ -163,5 +163,5 @@ stages:
       nfiles: 1
     - path: .\src\models\predict_model.py
       hash: md5
-      md5: 85fc013d65c1deb4d85487fbc6a89963
-      size: 1505
+      md5: 0665467fc68846f046db803dc4900d48
+      size: 1641

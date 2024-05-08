@@ -36,22 +36,23 @@ def main():
     current_path = Path(__file__)
     # root directory path
     root_path = current_path.parent.parent.parent
-    # read input file path
-    validation_data_path = root_path / sys.argv[1]
-    # load the data 
-    val_data = load_dataframe(validation_data_path)
-    # split the data into X and y
-    X_test, y_test = make_X_y(dataframe=val_data,target_column=TARGET)
-    # model path
-    model_path = root_path / 'models' / 'models' / model_name
-    # load the model
-    model = joblib.load(model_path)
-    # get predictions from model
-    y_pred = get_predictions(model=model,X=X_test)
-    # calcuate the r2 score
-    score = calculate_r2_score(y_actual=y_test,y_predicted=y_pred)
-    
-    print(score)
+    for ind in range(1,3):
+        # read input file path
+        data_path = root_path / 'data/processed/final' /sys.argv[ind]
+        # load the data 
+        data = load_dataframe(data_path)
+        # split the data into X and y
+        X_test, y_test = make_X_y(dataframe=data,target_column=TARGET)
+        # model path
+        model_path = root_path / 'models' / 'models' / model_name
+        # load the model
+        model = joblib.load(model_path)
+        # get predictions from model
+        y_pred = get_predictions(model=model,X=X_test)
+        # calcuate the r2 score
+        score = calculate_r2_score(y_actual=y_test,y_predicted=y_pred)
+        
+        print(f'\nThe score for dataset {sys.argv[ind]} is {score}')
     
 if __name__ == "__main__":
     main()
