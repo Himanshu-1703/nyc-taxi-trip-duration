@@ -1,0 +1,16 @@
+{
+    "vendor_id": 1,
+    "passenger_count": 1,
+    "pickup_longitude": -73.955612,
+    "pickup_latitude": 40.779526,
+    "dropoff_longitude": -73.963631,
+    "dropoff_latitude": 40.76125,
+    "pickup_hour": 9,
+    "pickup_date": 18,
+    "pickup_month": 1,
+    "pickup_day": 0,
+    "is_weekend": 0,
+    "haversine_distance": 2.141469,
+    "euclidean_distance": 0.019958,
+    "manhattan_distance": 0.026295
+  }
