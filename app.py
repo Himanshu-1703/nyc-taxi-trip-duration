@@ -1,15 +1,19 @@
 import joblib
 import uvicorn
 import pandas as pd
+from pathlib import Path
 from fastapi import FastAPI
 from sklearn.pipeline import Pipeline
 from data_models import PredictionDataset
 
 app = FastAPI()
 
-model_path = r'.\models\models\rf.joblib'
-preprocessor_path = r'.\models\transformers\preprocessor.joblib'
-output_transformer_path = r'.\models\transformers\output_transformer.joblib'
+model_file = "rf.joblib"
+
+root_path = Path(__file__).parent
+model_path = root_path / "models" / "models" / model_file
+preprocessor_path = model_path.parent.parent / "transformers" / "preprocessor.joblib"
+output_transformer_path = preprocessor_path.parent / "output_transformer.joblib"
 
 preprocessor = joblib.load(filename=preprocessor_path)
 model = joblib.load(filename=model_path)
