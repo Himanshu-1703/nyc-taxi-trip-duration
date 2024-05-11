@@ -1,6 +1,5 @@
 numpy
 pandas
-sklearn
 joblib
 uvicorn
 fastapi
